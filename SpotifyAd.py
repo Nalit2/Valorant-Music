@@ -10,7 +10,6 @@ class SpotifyAd:
     Stores all the import variables
     '''
     def __init__(self):
-        self.Title = ""
         self.muted = False
 
         '''
@@ -39,7 +38,7 @@ class SpotifyAd:
 
         def enumWindowsProc(hwnd, lParam):
             if win32gui.GetWindowText(hwnd) != "":
-                if windll.user32IsWindowVisible(hwnd):
+                if windll.user32.IsWindowVisible(hwnd):
                     Title.append(win32gui.GetWindowText(hwnd))
         win32gui.EnumWindows(enumWindowsProc, 0)
         return Title
@@ -58,6 +57,7 @@ class SpotifyAd:
                         if session.Process and session.Process.name().lower() == "spotify.exe":
                             spotify = session.SimpleAudioVolume
                             spotify.SetMute(1, None)
+                    print("Blocked Spotify Ad")
                 elif "Advertisement" not in self.setTitle() and self.muted:
                     self.muted = False
                     sessions = AudioUtilities.GetAllSessions()
