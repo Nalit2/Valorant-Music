@@ -2,7 +2,7 @@ import win32gui
 from time import sleep
 from ctypes import windll
 from pycaw.pycaw import AudioUtilities
-from threading import Thread
+from multiprocessing import Process
 from psutil import process_iter, NoSuchProcess, AccessDenied, ZombieProcess
 
 class SpotifyAd:
@@ -11,12 +11,7 @@ class SpotifyAd:
     '''
     def __init__(self):
         self.muted = False
-
-        '''
-        Starts the main thread, not a mutliprocess before because now the 
-        parent is multiprocessed, so a thread would be better
-        '''
-        Thread(target=self.muteAd()).start()
+        Process(target=self.muteAd()).start()
 
     def isAlive(self, processName):
         '''

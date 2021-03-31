@@ -1,4 +1,4 @@
-from multiprocessing import Process
+from threading import Thread
 import os, time
 
 while True:
@@ -31,7 +31,7 @@ print("Started application")
 if __name__ == '__main__':
     if Type.lower() != "yt" and Type.lower() != "youtube":
         from SpotifyAd import SpotifyAd
-        Process(target=SpotifyAd()).start()
+        Thread(target=SpotifyAd).start()
     
     from SpotifyVolume import SpotifyVolume
     SpotifyVolume(Resolution, Type.lower())

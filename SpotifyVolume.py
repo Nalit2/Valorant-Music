@@ -178,6 +178,7 @@ class SpotifyVolume:
         if screenshot.getpixel((0, 0)) == self.White[0] and screenshot.getpixel((0, height-1)) == self.White[1] and screenshot.getpixel((width-1, 0)) == self.White[0] and screenshot.getpixel((width-1, height-1)) == self.White[1]:
             return False
         elif self.isDead():
+            print("He")
             return False
         else:
             return True
