@@ -3,7 +3,7 @@ from pycaw.pycaw import AudioUtilities
 import multiprocessing, threading
 import psutil
 
-Resolution = [1920, 1080]#input("Example (1920x1080)\nResolution: ").split("x")
+Resolution = input("Example (1920x1080)\nResolution: ").split("x")
 Resolution = [int(Resolution[0]), int(Resolution[1])]
 
 class ValorantSpotify:
