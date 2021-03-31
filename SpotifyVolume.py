@@ -108,10 +108,10 @@ class SpotifyVolume:
         The normal buy round image
         '''
         screenshot = ImageGrab.grab(
-            bbox=(int(round(self.Resolution[0] * 0.4192)),
-                    int(round(self.Resolution[1] * 0.125)),
-                    int(round(self.Resolution[0] * 0.5812)),
-                    int(round(self.Resolution[1] * 0.2592))))
+            bbox=(int(self.Resolution[0] * 0.41927083333),
+                  int(self.Resolution[1] * 0.125),
+                  int(self.Resolution[0] * 0.58125),
+                  int(self.Resolution[1] * 0.25925925925)))
 
         width, height = screenshot.size
 
@@ -129,10 +129,10 @@ class SpotifyVolume:
         '''
     
         screenshot = ImageGrab.grab(
-            bbox=(int(round(self.Resolution[0] * 0.4042)),
-                    int(round(self.Resolution[1] * 0.125)),
-                    int(round(self.Resolution[0] * 0.5964)),
-                    int(round(self.Resolution[1] * 0.26))))
+            bbox=(int(self.Resolution[0] * 0.40416666666),
+                  int(self.Resolution[1] * 0.125),
+                  int(self.Resolution[0] * 0.59635416666),
+                  int(self.Resolution[1] * 0.26018518518)))
 
         width, height = screenshot.size
 
