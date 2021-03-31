@@ -6,13 +6,23 @@ from threading import Thread
 from psutil import process_iter, NoSuchProcess, AccessDenied, ZombieProcess
 
 class SpotifyAd:
+    '''
+    Stores all the import variables
+    '''
     def __init__(self):
         self.Title = ""
         self.muted = False
 
+        '''
+        Starts the main thread, not a mutliprocess before because now the 
+        parent is multiprocessed, so a thread would be better
+        '''
         Thread(target=self.muteAd()).start()
 
     def isAlive(self, processName):
+        '''
+        Checks if spotify is even running
+        '''
         for proc in process_iter():
             try:
                 if processName.lower() in proc.name().lower():
@@ -22,6 +32,9 @@ class SpotifyAd:
         return False
 
     def setTitle(self):
+        '''
+        Returns all the application titles
+        '''
         Title = []
 
         def enumWindowsProc(hwnd, lParam):
@@ -32,6 +45,9 @@ class SpotifyAd:
         return Title
 
     def muteAd(self):
+        '''
+        Sees if Advertisement is one of the tabs open, then mutes spotify only
+        '''
         while True:
             if self.isAlive("spotify"):
                 sleep(1)
