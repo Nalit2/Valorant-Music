@@ -3,6 +3,11 @@ from pycaw.pycaw import AudioUtilities
 import multiprocessing, threading
 import psutil
 
+import sys
+sys.setrecursionlimit(5000)
+
+block_cipher = None
+
 Resolution = input("Example (1920x1080)\nResolution: ").split("x")
 Resolution = [int(Resolution[0]), int(Resolution[1])]
 
@@ -10,10 +15,9 @@ class ValorantSpotify:
     class SpotifyAd:
         def __init__(self):
             self.Title = ""
-            self.SpotifyPointer = "GDI+ Window (Spotify.exe)"
             self.muted = False
 
-            multiprocessing.Process(target=self.muteAd).start()
+            multiprocessing.Process(target=self.muteAd()).start()
 
         def isAlive(self, processName):
             for proc in psutil.process_iter():
@@ -38,12 +42,14 @@ class ValorantSpotify:
                 if self.isAlive("spotify"):
                     time.sleep(1)
                     if "Advertisement" in self.setTitle() and not self.muted:
+                        self.muted = True
                         sessions = AudioUtilities.GetAllSessions()
                         for session in sessions:
                             if session.Process and session.Process.name().lower() == "spotify.exe":
                                 spotify = session.SimpleAudioVolume
                                 spotify.SetMute(1, None)
                     elif "Advertisement" not in self.setTitle() and self.muted:
+                        self.muted = False
                         sessions = AudioUtilities.GetAllSessions()
                         for session in sessions:
                             if session.Process and session.Process.name().lower() == "spotify.exe":
@@ -150,6 +156,7 @@ class ValorantSpotify:
 def StartAdblocker():
     ValorantSpotify().SpotifyAd()
 
+
 if __name__=='__main__':
-    multiprocessing.Process(target=StartAdblocker).start()
+    threading.Thread(target=StartAdblocker).start()
     ValorantSpotify().SpotifyVolume()
